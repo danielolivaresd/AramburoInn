@@ -1,7 +1,22 @@
 .banner{
 	margin-top: 34px !important;
+	color: white !important;
+	text-shadow: 0 2px 2px black;
 }
 
 .pure-menu{
 	background-color: white;
+}
+
+.banner-form{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.banner-form legend{
+	color: white !important;
+}
+
+.banner-form form input{
+	color: #526066;
 }

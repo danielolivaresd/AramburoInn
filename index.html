@@ -3,12 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="vendor/pure/css/pure-min.css">
 	<!--[if lte IE 8]>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="vendor/pure/css/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" type="text/css" href="vendor/pure/css/layouts/pricing.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -26,8 +26,24 @@
 
 	<div class="banner">
 		<h1 class="banner-head">
-			Comodidad al mejor precio
+			Reserva en línea
 		</h1>
+		<div class="banner-form">
+			<form class="pure-form">
+				<fieldset>
+					<legend>Busca tu habitación</legend>
+					<label for="adults"># Adultos</label>
+					<input type="number" name="adults" min="1" max="10">
+					<label for="children"># Niños</label>
+					<input type="number" name="children" min="0" max="10">
+					<label for="arrivalDate">Llegada</label>
+					<input type="date" name="arrivalDate">
+					<label for="leaveDate">Salida</label>
+					<input type="date" name="leaveDate">
+					<button class="pure-button pure-button-primary">Buscar</button>
+				</fieldset>
+			</form>
+		</div>
 	</div>
 
 	<div class="l-content">
