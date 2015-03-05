@@ -21,3 +21,21 @@
 .banner-form form input{
 	color: #526066;
 }
+
+.button-reserve{
+	background: #519251;
+	color: white;
+	border-radius: 0;
+}
+
+.button-biz{
+	background: #2c4985;
+	color:white;
+	border-radius: 0;
+}
+
+.button-enterprise{
+	background: black;
+	color:white;
+	border-radius: 0;
+}
