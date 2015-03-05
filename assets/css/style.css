@@ -2,6 +2,7 @@
 	margin-top: 34px !important;
 	color: white !important;
 	text-shadow: 0 2px 2px black;
+	box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4);
 }
 
 .pure-menu{
