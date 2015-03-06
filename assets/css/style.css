@@ -39,3 +39,9 @@
 	color:white;
 	border-radius: 0;
 }
+
+.pure-menu-heading{
+	font-family: 'Courgette', cursive;
+	text-transform: none;
+	font-size: 25px;
+}

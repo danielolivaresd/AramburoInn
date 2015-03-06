@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="vendor/pure/css/pure-min.css">
 	<!--[if lte IE 8]>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
@@ -15,6 +16,8 @@
     <title>Arámburo Inn</title>
 </head>
 <body>
+	<script type="text/javascript" src="vendor/jquery/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
 	<div class="pure-menu pure-menu-horizontal pure-menu-fixed">
 		<a href="#" class="pure-menu-heading">Arámburo Inn</a>
 		<ul class="pure-menu-list">
@@ -33,9 +36,9 @@
 				<fieldset>
 					<legend>Busca tu habitación</legend>
 					<label for="adults"># Adultos</label>
-					<input type="number" name="adults" min="1" max="10">
+					<input type="number" name="adults" min="1" max="10" value="1">
 					<label for="children"># Niños</label>
-					<input type="number" name="children" min="0" max="10">
+					<input type="number" name="children" min="0" max="10" value="0">
 					<label for="arrivalDate">Llegada</label>
 					<input type="date" name="arrivalDate">
 					<label for="leaveDate">Salida</label>
@@ -95,7 +98,7 @@
 						<h2>Habitación familiar</h2>
 
 						<span class="pricing-table-price">
-							$300 <span>por habitación</span>
+							$900 <span>por habitación</span>
 						</span>
 					</div>
 
