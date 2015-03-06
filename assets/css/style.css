@@ -66,3 +66,9 @@
 .contact-section a{
 	color: white;
 }
+
+.pricing-table-list img{
+	max-width: 100%;
+	max-height: 200px;
+	text-align: center;
+}
