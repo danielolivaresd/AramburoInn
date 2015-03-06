@@ -45,3 +45,24 @@
 	text-transform: none;
 	font-size: 25px;
 }
+
+.section-title{
+	text-align: center;
+	margin: 0;
+	padding: 20px;
+}
+
+.contact-section{
+	background-color: #519251;
+	color: white;
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+.contact-section div{
+	text-align: center;
+}
+
+.contact-section a{
+	color: white;
+}
