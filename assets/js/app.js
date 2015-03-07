@@ -1,3 +1,7 @@
+function selectRooms(room){
+		$(room).parent().parent().toggleClass("pure-table-odd");
+}
+
 //Min dates for room finding
 Date.prototype.toDateInputValue = (function() {
 	var local = new Date();
@@ -29,6 +33,7 @@ $(document).ready(function(){
 		$("ul.pure-menu-list li").removeClass("pure-menu-selected");
 		$(this).addClass("pure-menu-selected");
 	});
+
 });
 
 //Angular
@@ -47,10 +52,6 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 		for(var i =0; i<$scope.people-1; i++){
 			$scope.peopleRangeArray.push(i);
 		}
-	}
-
-	$scope.selectRooms=function(room){
-		$(room).addClass("pure-table-odd");
 	}
 	
 	$scope.initRooms = function(){$scope.rooms=[

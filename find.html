@@ -53,7 +53,7 @@
 				<td>{{room.name}}</td>
 				<td>{{room.type}}</td>
 				<td>{{room.price | currency}}</td>
-				<td><button class="pure-button" ng-click="selectRooms(this)">Seleccionar</button></td>
+				<td><button class="pure-button" onClick="selectRooms(this)">Seleccionar</button></td>
 			</tr>
 		</table>
 		<br>
@@ -67,7 +67,7 @@
 			<input type="number" name="maker_ccv" placeholder="CCV"><br>
 				<div ng-repeat="a in peopleRangeArray">
 					<label for="person_name-{{a}}">Visitante #{{a+1}}</label>
-					<input type="text" name="person_name-{{a}}" placeholder="Nombre #{{a+1}}">
+					<input type="text" name="person_name-{{a}}" placeholder="Nombre">
 					<input type="number" name="person_age-{{a}}" placeholder="Edad" min="0" max="150">
 				</div>
 		</form>
