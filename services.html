@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="vendor/pure/css/pure-min.css">
 	<!--[if lte IE 8]>
@@ -22,33 +23,40 @@
 	<div class="pure-menu pure-menu-horizontal pure-menu-fixed">
 		<a href="index.html" class="pure-menu-heading">Arámburo Inn</a>
 		<ul class="pure-menu-list">
-			<li class="pure-menu-item"><a href="index.html" class="pure-menu-link">Inicio</a></li>
+			<li class="pure-menu-item"><a href="#" class="pure-menu-link">Inicio</a></li>
 			<li class="pure-menu-item"><a href="index.html#rooms" class="pure-menu-link">Habitaciones</a></li>
-			<li class="pure-menu-item"><a href="services.html" class="pure-menu-link">Servicios</a></li>
-			<li class="pure-menu-item"><a href="#" class="pure-menu-link">Reservar</a></li>
+			<li class="pure-menu-item pure-menu-selected"><a href="services.html" class="pure-menu-link">Servicios</a></li>
+			<li class="pure-menu-item"><a href="find.html" class="pure-menu-link">Reservar</a></li>
 			<li class="pure-menu-item"><a href="index.html#contact" class="pure-menu-link">Contacto</a></li>
 		</ul>
 	</div>
 
-	<div class="l-content" ng-controller="FindRoomController">
 	<br><br><br>
-		<ul ng-repeat="reservation in reservations">
-			<li>
-				<p>ID de cuarto: {{reservation.room_id}}</p>
-				<p>De: {{reservation.from}}</p>
-				<p>A. {{reservation.to}}</p>
-				<p>Nombre: {{reservation.maker}}</p>
-				<p>Edad: {{reservation.maker_age}}</p>
-				<p>Correo: {{reservation.maker_email}}</p>
-				<p>Teléfono: {{reservation.maker_phone}}</p>
-				<p>Tarjeta de crédito: {{reservation.maker_credit_card}}</p>
-				<p>CCV: {{reservation.ccv}}</p>
-				<ul ng-repeat="person in reservation.people">
-					Persona: {{person}}
-				</ul>
-			<hr></li>
-		</ul>
+	<div class="l-content pure-g">
+		<div class="pure-u-1-5"></div>
+		<div class="pure-u-1-5 centered-text service">
+			<i class="fa fa-cutlery fa-3x"></i>
+			<h2>Cafetería</h2>
+			<img class="pure-img" src="assets/img/cafeteria.png">
+			<table class="pure-table pure-table-bordered service-table">
+				<tr><td>Abierta de 7:00 a 22:00</td></tr>
+				<tr><td>Comida rápida (Sándwiches, hamburguesas, pizza, etc.)</td></tr>
+				<tr><td>Bebidas (con y sin alcohol)</td></tr>
+			</table>
+		</div>
+		<div class="pure-u-1-5"></div>
+		<div class="pure-u-1-5 centered-text">
+			<i class="fa fa-tint fa-3x"></i>
+			<h2>Alberca</h2>
+			<img class="pure-img" src="assets/img/pool.jpg"></img>
+			<table class="pure-table pure-table-bordered service-table">
+				<tr><td>Profundidad: 1.40m</td></tr>
+				<tr><td>Templada</td></tr>
+				<tr><td>Area para niños</td></tr>
+				<tr><td>Jacuzzi</td></tr>
+			</table>
+		</div>
+		<div class="pure-u-1-5"></div>
 	</div>
-
 </body>
 </html>

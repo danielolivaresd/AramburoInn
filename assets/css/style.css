@@ -72,3 +72,11 @@
 	max-height: 200px;
 	text-align: center;
 }
+
+.centered-text{
+	text-align: center;
+}
+
+table.service-table{
+	width: 100%;
+}
