@@ -29,17 +29,17 @@
 		</ul>
 	</div>
 
-	<div class="l-content">
-		<center><form class="pure-form" ng-controller="FindRoomController">
+	<div class="l-content" ng-controller="FindRoomController">
+		<center><form class="pure-form">
 			<fieldset>
 				<legend>Busca tu habitación</legend>
 				<label for="adults"># Personas</label>
-				<input type="number" name="people" min="1" max="10" value="1" ng-model="people" ng-init="1">
+				<input type="number" name="people" min="1" max="10" value="1" ng-model="people" ng-change="findRoomForPeople()">
 				<label for="arrivalDate">Llegada</label>
-				<input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="validateLeaveDate()">
+				<input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="findRoomForPeople()">
 				<label for="leaveDate">Salida</label>
-				<input type="date" name="leaveDate" ng-model="leaveDate" ng-change="validateLeaveDate()">
-				<button class="pure-button pure-button-primary" ng-click="availableOn(arrivalDate,leaveDate)">Buscar</button>
+				<input type="date" name="leaveDate" ng-model="leaveDate" ng-change="findRoomForPeople()">
+				<!-- <button class="pure-button pure-button-primary" ng-click="availableOn()">Buscar</button> -->
 			</fieldset>
 		</form>
 		<table class="pure-table">
@@ -49,16 +49,10 @@
 				<th>Precio</th>
 				<th></th>
 			</tr>
-			<tr class="pure-table-odd">
-				<td>1</td>
-				<td>Individual</td>
-				<td>$300</td>
-				<td><button class="pure-button">Reservar</button></td>
-			</tr>
-			<tr class="">
-				<td>1<br>1<br>1</td>
-				<td>Individual<br>Doble<br>Familiar</td>
-				<td>$850</td>
+			<tr ng-repeat="room in availableRooms">
+				<td>{{room.name}}</td>
+				<td>{{room.type}}</td>
+				<td>{{room.price | currency}}</td>
 				<td><button class="pure-button">Reservar</button></td>
 			</tr>
 		</table></center>

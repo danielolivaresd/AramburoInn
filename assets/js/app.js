@@ -39,31 +39,35 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	today.setHours(0,0,0,0);
 	$scope.arrivalDate=today;
 	$scope.leaveDate=new Date(today.tomorrowDate());
-	$scope.people=0;
+	$scope.people=1;
 	$scope.availableRooms=[];
-	$scope.rooms=[
+	
+	$scope.initRooms = function(){$scope.rooms=[
 	{
 		id:1,
 		name:"101a",
 		type:"Individual",
 		max_people:2,
-		reservations: [1]
+		reservations: [1],
+		price: 300
 	},
 	{
 		id:2,
 		name:"201",
 		type:"Doble",
 		max_people:4,
-		reservations: [2]
+		reservations: [2],
+		price: 550
 	},
 	{
 		id:3,
 		name:"305",
 		type:"Familiar",
 		max_people:6,
-		reservations: []
+		reservations: [],
+		price: 900
 	}
-	]
+	]};
 	$scope.reservations=[
 	{
 		id:1,
@@ -84,14 +88,16 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	]
 	$scope.validateLeaveDate=function(){
 		if($scope.leaveDate < $scope.arrivalDate){
-			console.log("Leave date cannot be less than arrival date.");
 			$scope.leaveDate = $scope.arrivalDate;
 		}
 	}
 	$scope.findRoomForPeople=function(){
-
+		$scope.initRooms();
+		$scope.availableRooms = $scope.rooms;
+		$scope.validateLeaveDate();
+		$scope.availableRooms = $scope.availableOn();
 	}
-	$scope.availableOn=function(arrival,leave){
+	$scope.availableOn=function(){
 		var from = $scope.arrivalDate;
 		var to = $scope.leaveDate;
 		var rooms = $scope.rooms;
@@ -99,23 +105,17 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 		var reservations = $scope.reservations;
 		//Get all rooms that don't belong to a reservation during the time [from..to]
 		var filtered_reservations = $filter("betweenDates")(reservations, from, to); //All the reservations in the timeframe.
-		//console.log(filtered_reservations);
 
 		//Remove the rooms from the filtered reservations
 		angular.forEach(rooms, function(obj){
 			angular.forEach(filtered_reservations, function(r){
 				if(obj.reservations.indexOf(r.room_id)>=0){ //Contains a reservation
-					console.log("Room "+obj.id+" contains a reservation "+r.id);
 					result.splice(result.indexOf(obj),1);
 				}
 			});
 		});
 
-		console.log(result);
-
-/*		var availableRooms = $filter("notInFilteredReservations")(rooms, filtered_reservations);
-		console.log(availableRooms);
-*/
+		return result;
 	}
 }]);
 app.filter('betweenDates', function(){
@@ -130,16 +130,3 @@ app.filter('betweenDates', function(){
 		return filtered;
 	};
 });
-/*app.filter("notInFilteredReservations", function(){
-	return function(input, filtered_reservations){
-		var filtered=[];
-		angular.forEach(input, function(obj){
-			angular.forEach(filtered_reservations, function(fr){
-				if(obj!=fr.room_id && $.inArray(obj, filtered) == -1){
-					filtered.push(obj);
-				}
-			});
-		});
-		return filtered;
-	}
-});*/
