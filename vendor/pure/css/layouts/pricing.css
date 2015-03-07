@@ -21,7 +21,7 @@ p {
  * -- Layout Styles --
  */
 .l-content {
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 .l-box {
@@ -87,6 +87,7 @@ p {
 .pricing-tables {
     margin-bottom: 3.125em;
     text-align: center;
+    padding-top: 50px;
 }
 
 /*

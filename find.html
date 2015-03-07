@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="vendor/pure/css/pure-min.css">
+	<!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="vendor/pure/css/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="vendor/pure/css/layouts/pricing.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Arámburo Inn</title>
+</head>
+<body>
+	<script type="text/javascript" src="vendor/jquery/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<div class="pure-menu pure-menu-horizontal pure-menu-fixed">
+		<a href="#" class="pure-menu-heading">Arámburo Inn</a>
+		<ul class="pure-menu-list">
+			<li class="pure-menu-item"><a href="index.html" class="pure-menu-link">Inicio</a></li>
+			<li class="pure-menu-item"><a href="index.html#rooms" class="pure-menu-link">Habitaciones</a></li>
+			<li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Reservar</a></li>
+			<li class="pure-menu-item"><a href="#contact" class="pure-menu-link">Contacto</a></li>
+		</ul>
+	</div>
+
+	<div class="l-content">
+		<center><form class="pure-form" action="find.html">
+			<fieldset>
+				<legend>Busca tu habitación</legend>
+				<label for="adults"># Personas</label>
+				<input type="number" name="people" min="1" max="10" value="1">
+				<label for="arrivalDate">Llegada</label>
+				<input type="date" name="arrivalDate">
+				<label for="leaveDate">Salida</label>
+				<input type="date" name="leaveDate">
+				<button class="pure-button pure-button-primary">Buscar</button>
+			</fieldset>
+		</form>
+		<table class="pure-table">
+			<tr>
+				<th>#</th>
+				<th>Tipo</th>
+				<th>Precio</th>
+				<th></th>
+			</tr>
+			<tr class="pure-table-odd">
+				<td>1</td>
+				<td>Individual</td>
+				<td>$300</td>
+				<td><button class="pure-button">Reservar</button></td>
+			</tr>
+			<tr class="">
+				<td>1<br>1<br>1</td>
+				<td>Individual<br>Doble<br>Familiar</td>
+				<td>$850</td>
+				<td><button class="pure-button">Reservar</button></td>
+			</tr>
+		</table></center>
+	</div>
+
+	<div class="l-content contact-section" id="contact">
+		<h2 class="section-title">Contacto</h2>
+		<div class="pure-g">
+			<div class="pure-u-1-4"></div>
+			<div class="pure-u-1-4">
+				<h4>Teléfono</h4>
+				<p><a href="phone:+52 4448 418923">+52 4448 418923</a></p>
+			</div>
+			<div class="pure-u-1-4">
+				<h4>E-mail</h4>
+				<p><a href="mailto:contacto@aramburoinn.com">contacto@aramburoinn.com</a></p>
+			</div>
+			<div class="pure-u-1-4"></div>
+		</div>
+	</div>
+</body>
+</html>
