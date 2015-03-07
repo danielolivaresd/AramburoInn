@@ -41,6 +41,17 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	$scope.leaveDate=new Date(today.tomorrowDate());
 	$scope.people=1;
 	$scope.availableRooms=[];
+	$scope.peopleRangeArray = [];
+	$scope.peopleRange = function(){
+		$scope.peopleRangeArray = [];
+		for(var i =0; i<$scope.people-1; i++){
+			$scope.peopleRangeArray.push(i);
+		}
+	}
+
+	$scope.selectRooms=function(room){
+		$(room).addClass("pure-table-odd");
+	}
 	
 	$scope.initRooms = function(){$scope.rooms=[
 	{
@@ -72,6 +83,11 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	{
 		id:1,
 		maker: "Rodrigo López",
+		maker_age: 18,
+		maker_email: "rodrigo@gmail.com",
+		maker_phone: 12345,
+		maker_credit_card: 123412341234123,
+		maker_ccv: 159,
 		people: ["Rodrigo López", "Javier Martinez"],
 		from: new Date(2015,04,04), //4 de Mayo de 2015
 		to: new Date(2015,04,06),
@@ -80,6 +96,11 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	{
 		id:2,
 		maker: "Fernanda Rosales",
+		maker_age: 18,
+		maker_email: "fernanda@gmail.com",
+		maker_phone: 12345,
+		maker_credit_card: 123412341234123,
+		maker_ccv: 159,
 		people: ["Fernanda Rosales", "Javier Gómez", "Lola Gómez", "Junior Gómez"],
 		from: new Date(2015,05,04), //4 de Junio de 2015
 		to: new Date(2015,05,14),
@@ -93,6 +114,7 @@ app.controller("FindRoomController", ["$scope","$filter", function($scope,$filte
 	}
 	$scope.findRoomForPeople=function(){
 		$scope.initRooms();
+		$scope.peopleRange();
 		$scope.availableRooms = $scope.rooms;
 		$scope.validateLeaveDate();
 		$scope.availableRooms = $scope.availableOn();

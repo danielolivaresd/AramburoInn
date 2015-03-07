@@ -53,9 +53,27 @@
 				<td>{{room.name}}</td>
 				<td>{{room.type}}</td>
 				<td>{{room.price | currency}}</td>
-				<td><button class="pure-button">Reservar</button></td>
+				<td><button class="pure-button" ng-click="selectRooms(this)">Seleccionar</button></td>
 			</tr>
-		</table></center>
+		</table>
+		<br>
+		<form class="pure-form">
+			<label for="maker">A nombre de:</label>
+			<input type="text" name="maker_name" placeholder="Nombre">
+			<input type="number" name="maker_age" placeholder="Edad" min="18" max="150" val="18">
+			<input type="email" name="maker_email" placeholder="E-mail">
+			<input type="number" name="maker_phone" placeholder="Teléfono">
+			<input type="number" name="maker_credit_card" placeholder="Credit Card">
+			<input type="number" name="maker_ccv" placeholder="CCV"><br>
+				<div ng-repeat="a in peopleRangeArray">
+					<label for="person_name-{{a}}">Visitante #{{a+1}}</label>
+					<input type="text" name="person_name-{{a}}" placeholder="Nombre #{{a+1}}">
+					<input type="number" name="person_age-{{a}}" placeholder="Edad" min="0" max="150">
+				</div>
+		</form>
+		<br>
+		<button class="pure-button button-reserve">Reservar</button>
+		</center>
 	</div>
 
 </body>
