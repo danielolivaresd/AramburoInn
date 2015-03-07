@@ -1,0 +1,103 @@
+<div class="banner">
+    <h1 class="banner-head">
+        Reserva en línea
+    </h1>
+    <div class="banner-form">
+        <form class="pure-form" action="find.html" >
+            <fieldset>
+                <legend>Busca tu habitación</legend>
+                <label for="adults"># Personas</label>
+                <input type="number" name="people" min="1" max="10" value="1" ng-model="people">
+                <label for="arrivalDate">Llegada</label>
+                <input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="validateLeaveDate()">
+                <label for="leaveDate">Salida</label>
+                <input type="date" name="leaveDate" ng-model="leaveDate" ng-change="validateLeaveDate()">
+                <button class="pure-button pure-button-primary">Buscar</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="l-content">
+
+    <div class="pricing-tables pure-g" id="rooms">
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-free">
+                <div class="pricing-table-header">
+                    <h2>Habitación individual</h2>
+
+                    <span class="pricing-table-price">
+                        $300 <span>por noche</span>
+                    </span>
+                </div>
+
+                <ul class="pricing-table-list">
+                    <li><img src="/images/single.jpg"></li>
+                    <li>Máx. 2 personas</li>
+                    <li>1 cama individual</li>
+                    <li>Aire acondicionado, televisión y agua caliente</li>
+                </ul>
+
+                <button class="button-reserve button-choose pure-button">Reservar</button>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-biz">
+                <div class="pricing-table-header">
+                    <h2>Habitación doble</h2>
+
+                    <span class="pricing-table-price">
+                        $550 <span>por noche</span>
+                    </span>
+                </div>
+
+                <ul class="pricing-table-list">
+                    <li><img src="/images/double.jpg"></li>
+                    <li>Máx. 4 personas</li>
+                    <li>2 camas individuales</li>
+                    <li>Aire acondicionado, televisión, agua caliente y mini refrigerador</li>
+                </ul>
+
+                <button class="button-choose pure-button button-biz">Reservar</button>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pricing-table pricing-table-enterprise">
+                <div class="pricing-table-header">
+                    <h2>Habitación familiar</h2>
+
+                    <span class="pricing-table-price">
+                        $900 <span>por noche</span>
+                    </span>
+                </div>
+
+                <ul class="pricing-table-list">
+                    <li><img src="/images/familiar.jpg"></li>
+                    <li>Máx. 6 personas</li>
+                    <li>1 cama King-size y 2 camas individuales</li>
+                    <li>Aire acondicionado, televisión, agua caliente, mini refrigerador y estufa</li>
+                </ul>
+
+                <button class="button-choose pure-button button-enterprise">Reservar</button>
+            </div>
+        </div>
+
+    </div> <!-- end pricing-tables -->
+</div>
+<div class="l-content contact-section" id="contact">
+    <h2 class="section-title">Contacto</h2>
+    <div class="pure-g">
+        <div class="pure-u-1-4"></div>
+        <div class="pure-u-1-4">
+            <h4>Teléfono</h4>
+            <p><a href="phone:+52 4448 418923">+52 4448 418923</a></p>
+        </div>
+        <div class="pure-u-1-4">
+            <h4>E-mail</h4>
+            <p><a href="mailto:contacto@aramburoinn.com">contacto@aramburoinn.com</a></p>
+        </div>
+        <div class="pure-u-1-4"></div>
+    </div>
+</div>
