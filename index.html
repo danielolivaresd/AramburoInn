@@ -38,7 +38,7 @@
 				<fieldset>
 					<legend>Busca tu habitación</legend>
 					<label for="adults"># Personas</label>
-					<input type="number" name="people" min="1" max="10" value="1">
+					<input type="number" name="people" min="1" max="10" value="1" ng-model="people">
 					<label for="arrivalDate">Llegada</label>
 					<input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="validateLeaveDate()">
 					<label for="leaveDate">Salida</label>

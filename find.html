@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="vendor/jquery/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<div class="pure-menu pure-menu-horizontal pure-menu-fixed">
-		<a href="#" class="pure-menu-heading">Arámburo Inn</a>
+		<a href="index.html" class="pure-menu-heading">Arámburo Inn</a>
 		<ul class="pure-menu-list">
 			<li class="pure-menu-item"><a href="index.html" class="pure-menu-link">Inicio</a></li>
 			<li class="pure-menu-item"><a href="index.html#rooms" class="pure-menu-link">Habitaciones</a></li>
@@ -30,16 +30,16 @@
 	</div>
 
 	<div class="l-content">
-		<center><form class="pure-form" action="find.html" ng-controller="FindRoomController">
+		<center><form class="pure-form" ng-controller="FindRoomController">
 			<fieldset>
 				<legend>Busca tu habitación</legend>
 				<label for="adults"># Personas</label>
-				<input type="number" name="people" min="1" max="10" value="1">
+				<input type="number" name="people" min="1" max="10" value="1" ng-model="people" ng-init="1">
 				<label for="arrivalDate">Llegada</label>
 				<input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="validateLeaveDate()">
 				<label for="leaveDate">Salida</label>
 				<input type="date" name="leaveDate" ng-model="leaveDate" ng-change="validateLeaveDate()">
-				<button class="pure-button pure-button-primary">Buscar</button>
+				<button class="pure-button pure-button-primary" ng-click="availableOn(arrivalDate,leaveDate)">Buscar</button>
 			</fieldset>
 		</form>
 		<table class="pure-table">
