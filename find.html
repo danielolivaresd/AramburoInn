@@ -30,15 +30,15 @@
 	</div>
 
 	<div class="l-content">
-		<center><form class="pure-form" action="find.html">
+		<center><form class="pure-form" action="find.html" ng-controller="FindRoomController">
 			<fieldset>
 				<legend>Busca tu habitación</legend>
 				<label for="adults"># Personas</label>
 				<input type="number" name="people" min="1" max="10" value="1">
 				<label for="arrivalDate">Llegada</label>
-				<input type="date" name="arrivalDate">
+				<input type="date" name="arrivalDate" ng-model="arrivalDate" ng-change="validateLeaveDate()">
 				<label for="leaveDate">Salida</label>
-				<input type="date" name="leaveDate">
+				<input type="date" name="leaveDate" ng-model="leaveDate" ng-change="validateLeaveDate()">
 				<button class="pure-button pure-button-primary">Buscar</button>
 			</fieldset>
 		</form>

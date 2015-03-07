@@ -24,6 +24,13 @@ $(document).ready(function(){
 //Angular
 
 var app = angular.module("hotel", []);
-app.controller("RoomController", ["$scope","$filter", function($scope,$filter){
-	
+app.controller("FindRoomController", ["$scope","$filter", function($scope,$filter){
+	$scope.arrivalDate="";
+	$scope.leaveDate="";
+	$scope.validateLeaveDate=function(){
+		if($scope.leaveDate < $scope.arrivalDate){
+			console.log("Leave date cannot be less tan arrival date.");
+			$scope.leaveDate = $scope.arrivalDate;
+		}
+	}
 }]);
