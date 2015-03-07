@@ -20,3 +20,10 @@ $(document).ready(function(){
 		$(this).addClass("pure-menu-selected");
 	});
 });
+
+//Angular
+
+var app = angular.module("hotel", []);
+app.controller("RoomController", ["$scope","$filter", function($scope,$filter){
+	
+}]);
