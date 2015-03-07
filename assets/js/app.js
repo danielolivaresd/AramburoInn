@@ -123,7 +123,7 @@ app.filter('betweenDates', function(){
 	return function(input, arrivalDate, leaveDate) {
 		var filtered = [];
 		angular.forEach(input, function(obj){
-			if(obj.from >= arrivalDate && obj.to <= leaveDate)   {
+			if((obj.from <= arrivalDate && arrivalDate <= obj.to) || (obj.from <= leaveDate  && leaveDate <= obj.to)){
 				filtered.push(obj);
 			}
 		});
