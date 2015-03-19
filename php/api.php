@@ -103,10 +103,16 @@ function get_app_list()
   return $app_list;
 }
 
-$possible_url = array("get_app_list", "get_app", "get_room", "get_room_list", "post_room", "delete_room","autenthicate");
+$possible_url = array("get_app_list", 
+  "get_app", 
+  "get_room", 
+  "get_room_list", 
+  "post_room", 
+  "delete_room",
+  "autenthicate",
+  "reserva");
 
 $value = "An error has occurred ";
-
 
 function get_user_by_uname_and_passsword($uname, $psword)
 {
@@ -155,20 +161,68 @@ function post_room($precio, $camas, $tipo, $numeroHabitacion, $comentarios){
     return $info;
 }
 
-function delete_room($id){
+function delete_room($id)
+{
   $info = array();
   require ('mysqli_connect.php');
   $q = "DELETE FROM habitaciones WHERE id=$id LIMIT 1";    
     $result = @mysqli_query ($dbcon , $q);
     
     if (mysqli_affected_rows($dbcon ) == 1) { // If it ran OK.
-// Print a message:
+    // Print a message:
       $info = array("status" =>'The record has been deleted');
     } else { // If the query did not run OK.
      $info = array("error" =>'The record could not be deleted');
     }
   mysqli_close($dbcon );
   return $info;
+}
+
+function do_reservacion($habitacionesIds, $fechaInicial, $fechaFinal, $comentarios)
+{
+  require('mysqli_connect.php');
+  require('uuid.php');
+  //separar los id de las habitaciones
+    
+  $habitaciones = explode("*", $habitacionesIds);
+  // generar codigo de reserva
+  $codigo = UUID::v4();
+  $codigoReserva = array();
+  $idReservacion = "-1";
+
+  // insertar reservacion
+  $q = "INSERT INTO reservaciones (fechaEntrada,fechaSalida,codigoReserva,comentarios) 
+  VALUES ('$fechaInicial','$fechaFinal', '$codigo', '$comentarios')";
+  $result = @mysqli_query($dbcon, $q);
+  if($result)
+  {
+    $codigoReserva = array("codigo" => $codigo);
+    //obtener id de la reservacion insertada
+    $sqlLastId = "SELECT MAX(id) as 'ID' FROM reservaciones";
+    $resultIdReserv = @mysqli_query($dbcon, $sqlLastId);
+    if($resultIdReserv)
+    {
+      while ($row = mysqli_fetch_array($resultIdReserv, MYSQLI_ASSOC)) {
+        $idReservacion = $row['ID'];
+      }
+    }
+  }
+  else
+  {
+    $codigoReserva = array("codigo" => 'Error al generar la reservacion.'); 
+  }
+
+  // insertar relacion reservacion-habitaciones
+  foreach ($habitaciones as &$hab) {
+    $sql = "INSERT INTO habitacionreserva (idReservacion, idHabitacion) 
+    VALUES ('$idReservacion','$hab')";
+
+    $result = @mysqli_query($dbcon, $sql);
+  }
+  mysqli_close($dbcon);
+
+  // regresar codigo de reservacion
+  return $codigoReserva;
 }
 
 if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
@@ -217,6 +271,11 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
           else
             $value = "Missing argument";
         break;
+        case "reserva":
+          if(isset($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]))
+            $value = do_reservacion($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]);
+          else
+            $value = "Missing argument";
     }
 }
 
