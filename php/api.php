@@ -30,6 +30,7 @@ reservations=[
   {
     
   }]*/
+
 function get_room_list(){
   
   require ('mysqli_connect.php');
@@ -68,6 +69,7 @@ function get_room_by_id($id) {
 mysqli_free_result ($result);
   return $room_info;
 }
+
 function get_app_by_id($id)
 {
   $app_info = array();
@@ -101,16 +103,17 @@ function get_app_list()
   return $app_list;
 }
 
-$possible_url = array("get_app_list", "get_app", "get_room", "get_room_list", "post_room", "delete_room");
+$possible_url = array("get_app_list", "get_app", "get_room", "get_room_list", "post_room", "delete_room","autenthicate");
 
 $value = "An error has occurred ";
 
 
 function get_user_by_uname_and_passsword($uname, $psword)
 {
+  require ('mysqli_connect.php');
   $user_info = array();
 
-  $sql = "SELECT * FROM `admin` WHERE `uname` = \'".$uname."\' and `psword` = \'".$psword."\'";
+  $sql = "SELECT * FROM admin WHERE uname = '$uname' and psword = '$psword' ";//= \'".$uname."\' and `psword` = \'".$psword."\'";
   $result = @mysqli_query ($dbcon, $sql);
 
   if ($result) {
@@ -125,6 +128,7 @@ function get_user_by_uname_and_passsword($uname, $psword)
     ); 
     }
   }
+  mysqli_free_result ($result);
   return $user_info;
 }
 
@@ -166,6 +170,7 @@ function delete_room($id){
   mysqli_close($dbcon );
   return $info;
 }
+
 if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
 {
   switch ($_GET["action"])
