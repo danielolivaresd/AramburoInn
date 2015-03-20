@@ -31,7 +31,8 @@ reservations=[
     
   }]*/
 
-function get_room_list(){
+function get_room_list()
+{
   
   require ('mysqli_connect.php');
   $q = "SELECT id,  precio, camas, tipo, numeroHabitacion, comentarios FROM habitaciones ";   
@@ -110,7 +111,8 @@ $possible_url = array("get_app_list",
   "post_room", 
   "delete_room",
   "autenthicate",
-  "reserva");
+  "reserva",
+  "get_reservacion");
 
 $value = "An error has occurred ";
 
@@ -138,7 +140,54 @@ function get_user_by_uname_and_passsword($uname, $psword)
   return $user_info;
 }
 
-function post_room($precio, $camas, $tipo, $numeroHabitacion, $comentarios){
+function get_reservacion_by_codigo($codigo)
+{
+  require('mysqli_connect.php');
+  $infoReserva = array();
+  //$infoReservaList = array();
+
+  $sql = "select reservaciones.fechaEntrada,
+  reservaciones.fechaSalida,
+  reservaciones.codigoReserva,
+  reservaciones.comentarios,
+  habitaciones.* 
+  from habitaciones
+  inner join habitacionreserva on habitaciones.id = habitacionreserva.idHabitacion
+  inner join reservaciones on reservaciones.id = habitacionreserva.idReservacion
+  where reservaciones.codigoReserva = '$codigo'";
+
+  $result = @mysqli_query ($dbcon, $sql);
+
+  if($result)
+  {
+    $c = 0;
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+    {
+      $infoReserva = array(
+        "fechaEntrada" => $row['fechaEntrada'],
+        "fechaSalida" => $row['fechaSalida'],
+        "codigoReserva" => $row['codigoReserva'],
+        "comentarios" => $row['comentarios'],
+        "id" => $row['id'],
+        "precio" => $row['precio'],
+        "camas" => $row['camas'],
+        "tipo" => $row['tipo'],
+        "numeroHabitacion" => $row['numeroHabitacion'],
+        "mantenimiento" => $row['mantenimiento'],
+        "comentarios" => $row['comentarios']
+        );
+      $infoReservaList [$c] = array($infoReserva);
+      $c = $c +1;
+    }
+  }
+
+  mysqli_free_result ($result);
+  
+  return $infoReservaList;
+}
+
+function post_room($precio, $camas, $tipo, $numeroHabitacion, $comentarios)
+{
   $info = array();
   require ('mysqli_connect.php');
   $a = "SELECT *  FROM habitaciones ";   
@@ -274,6 +323,12 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
         case "reserva":
           if(isset($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]))
             $value = do_reservacion($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]);
+          else
+            $value = "Missing argument";
+        break;
+        case "get_reservacion":
+          if(isset($_GET["codigo"]))
+            $value = get_reservacion_by_codigo($_GET["codigo"]);
           else
             $value = "Missing argument";
     }
