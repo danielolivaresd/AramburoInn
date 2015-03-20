@@ -144,7 +144,7 @@ function get_reservacion_by_codigo($codigo)
 {
   require('mysqli_connect.php');
   $infoReserva = array();
-  //$infoReservaList = array();
+  $infoReservaList = array();
 
   $sql = "select reservaciones.fechaEntrada,
   reservaciones.fechaSalida,
