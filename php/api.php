@@ -227,10 +227,61 @@ function delete_room($id)
   return $info;
 }
 
-function do_reservacion($habitacionesIds, $fechaInicial, $fechaFinal, $comentarios)
+function do_reservacion($habitacionesIds, $fechaInicial, $fechaFinal, $comentarios, 
+            $nombre, $apellido, $email, $telefono, $creditCard, $ccv)
 {
   require('mysqli_connect.php');
   require('uuid.php');
+  //revisar si cliente existe por correo electronico
+  $clienteId = 0;
+  $q1 = "SELECT count(id) as id from clientes where email = '$email'";
+  $result = @mysqli_query($dbcon, $q1);
+  if($result)
+  {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $clienteId = $row['id'];
+    }
+  }
+
+  if($clienteId == 0)
+  {
+    $q2 = "INSERT INTO clientes (nombre, apellido, email, idDomicilio, creditCard, ccv, telefono)
+      VALUES ('$nombre', '$apellido', '$email', '0', '$creditCard', '$ccv', '$telefono')";
+    $result = @mysqli_query($dbcon, $q2);
+    if($result)
+    {
+      $q3 = "SELECT MAX(id) as 'ID' FROM clientes";
+      $resultIdReserv = @mysqli_query($dbcon, $q3);
+      if($resultIdReserv)
+      {
+        while ($row = mysqli_fetch_array($resultIdReserv, MYSQLI_ASSOC)) {
+          $clienteId = $row['ID'];
+        }
+      }
+    }
+    else
+    {
+      $clienteId = "error al guardar cliente.";
+    }
+  }
+  else
+  {
+    $q4 = "UPDATE clientes SET nombre = '$nombre', apellido = '$apellido', 
+      creditCard = '$creditCard', ccv = '$ccv', telefono = '$telefono'
+      WHERE email = '$email'";
+    $result = @mysqli_query($dbcon, $q4);
+    if($result)
+    {
+      $q5 = "SELECT id as 'ID' FROM clientes WHERE email = '$email'";
+      $resultIdReserv = @mysqli_query($dbcon, $q5);
+      if($resultIdReserv)
+      {
+        while ($row = mysqli_fetch_array($resultIdReserv, MYSQLI_ASSOC)) {
+          $clienteId = $row['ID'];
+        }
+      }
+    }
+  }
   //separar los id de las habitaciones
     
   $habitaciones = explode("*", $habitacionesIds);
@@ -240,8 +291,8 @@ function do_reservacion($habitacionesIds, $fechaInicial, $fechaFinal, $comentari
   $idReservacion = "-1";
 
   // insertar reservacion
-  $q = "INSERT INTO reservaciones (fechaEntrada,fechaSalida,codigoReserva,comentarios) 
-  VALUES ('$fechaInicial','$fechaFinal', '$codigo', '$comentarios')";
+  $q = "INSERT INTO reservaciones (fechaEntrada,fechaSalida,codigoReserva,comentarios, idCliente) 
+  VALUES ('$fechaInicial','$fechaFinal', '$codigo', '$comentarios','$clienteId')";
   $result = @mysqli_query($dbcon, $q);
   if($result)
   {
@@ -258,7 +309,7 @@ function do_reservacion($habitacionesIds, $fechaInicial, $fechaFinal, $comentari
   }
   else
   {
-    $codigoReserva = array("codigo" => 'Error al generar la reservacion.'); 
+    $codigoReserva = array("codigo" => 'Error al generar la reservacion.'.$clienteId); 
   }
 
   // insertar relacion reservacion-habitaciones
@@ -308,8 +359,8 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
         break;
         //$precio, $camas, $tipo, $numeroHabitacion, $comentarios
         case "post_room":
-          if (isset($_GET["precio"],$_GET["camas"],$_GET["tipo"],$_GET["numeroHabitacion"], $_GET["comentarios"] ))
-            $value = post_room($_GET["precio"],$_GET["camas"], $_GET["tipo"], $_GET["numeroHabitacion"], $_GET["comentarios"] );
+          if (isset($_GET["precio"],$_GET["camas"],$_GET["tipo"],$_GET["numeroHabitacion"], $_GET["comentarios"]))
+            $value = post_room($_GET["precio"],$_GET["camas"], $_GET["tipo"], $_GET["numeroHabitacion"], $_GET["comentarios"]);
           else
             $value = "Missing argument";
         break;
@@ -321,8 +372,12 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
             $value = "Missing argument";
         break;
         case "reserva":
-          if(isset($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]))
-            $value = do_reservacion($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"]);
+          if(isset($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"], 
+            $_GET["nombre"], $_GET["apellido"], $_GET["email"], $_GET["telefono"], 
+            $_GET["creditCard"], $_GET["ccv"]))
+            $value = do_reservacion($_GET["habitacionesIds"], $_GET["fechaInicial"], $_GET["fechaFinal"], $_GET["comentarios"], 
+            $_GET["nombre"], $_GET["apellido"], $_GET["email"], $_GET["telefono"], 
+            $_GET["creditCard"], $_GET["ccv"]);
           else
             $value = "Missing argument";
         break;
@@ -340,7 +395,7 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url))
 //http://localhost/hotel/api.php/api.php?action=get_room&id=1003
 //http://localhost/hotel/api.php/api.php?action=post_room&price=1003&type=double&mini_descr=bonita&n_room=3&thumb=lalala&status=free
 //http://localhost/simpleIdb/api.php/api.php?action=delete_room&id=1007
- 
+ //http://localhost/AramburoInn/php/api.php/api.php?action=reserva&habitacionesIds=12*34*24*48&fechaInicial=2015-06-15&fechaFinal=2015-06-24&comentarios=coments&nombre=gaddyel&apellido=enriquez&email=gaddyel.enriquezm@gmail.com&telefono=1234567890&creditCard=1234567890123456&ccv=1234
 //return JSON array
 exit(json_encode($value));
 ?>
